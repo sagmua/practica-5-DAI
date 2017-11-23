@@ -1,0 +1,26 @@
+{% extends "simple-centered.html" %}
+
+{% block title %}
+	setting
+{% endblock %}
+{% block head %}
+	{{super()}}
+{% endblock %}
+
+{% block content %}
+	{% block centered_content %}
+	<h2 class = "w3-text-color-blue">Modificar datos del usuario</h2>
+	<form action="/update" method = "post">
+ 				<p>Nombre de Usuario: <input type = "text" name = "username"/></p>
+ 				<p>Descripcion: <input type="text" name="descripcion">
+ 				<p>Contraseña: <input type = "password" name = "password"/></p>
+ 				<p>Repite la contraseña: <input type = "password" name = "confirm_password"/></p>
+ 				{% if error %}
+ 					<p class="w3-text-color-red">No coinciden las contraseñas</p>
+ 				{% endif %}
+ 				<p><input type = "submit" value = "Modificar"/></p>
+	</form>
+	{% endblock %}
+{% endblock %}
+	
+	

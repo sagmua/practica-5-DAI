@@ -1,0 +1,143 @@
+body{
+	font-family: "Tahoma";
+}
+
+#centered-body {
+	text-align: center;
+	padding: 2%;
+}
+
+
+
+
+header img {
+	width: 50%;
+	display: inline;
+	vertical-align: middle;
+	margin: 1%;
+	padding: 1%
+}
+
+#head-bar{
+    background-color: #00ef97
+}
+
+
+footer{
+	
+	left:0;
+	right: 0;
+	width: 100%;
+	background-color: #00ef97
+	color:white;
+	text-align: center
+}
+
+#content-middle{
+	text-align: center;
+	padding: 4%;
+}
+
+body centered-content{
+
+	text-align: center;
+
+}
+
+
+
+
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #00ef97;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 230px;
+    text-align: left;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+
+
+
+
+.important {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+
+.background {
+    background-color: #d3ffc9
+}
+
+
+/* MENU VERTICAL */
+.vertical-menu {
+    width: 230px; /* Set a width if you like */
+}
+
+.vertical-menu a {
+    background-color: #00ef97; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+    background-color: #00ef97; /* Add a green color to the "active/current" link */
+    color: white;
+}
+
+
+
+
+

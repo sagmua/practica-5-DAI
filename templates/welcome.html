@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{data_page.title}}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="static/style.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+      $("#change-font").click(function(){
+          $("#content-middle").addClass("important");
+      });
+
+
+      $("#change-background").click(function(){
+          $("body").addClass("background");
+      });
+
+      $("#show-menu").click(function(){
+        $("#vertical-menu").toggle();
+      });
+
+    });
+    </script>
+
+
+	</head>
+
+
+
+
+
+	<body>
+
+		<header class="w3-border-bottom w3-border-green">
+      <div id = "head-bar" class="w3-bar">
+        <input id="change-font" type = "submit" class="w3-bar-item w3-button w3-green " value = "Cambiar fuente"/>
+        <input id="change-background" type = "submit" class="w3-bar-item w3-button w3-green " value = "Cambiar fondo"/>
+        <input id="show-menu" type = "submit" class="w3-bar-item w3-button w3-green " value = "Mostrar menu"/>
+        <form action="" method="post">
+          <input type = "submit" class="w3-bar-item w3-button w3-green w3-right " value = "GO"/>
+          <input type="text" class="w3-bar-item w3-input w3-right w3-round-xxlarge" placeholder="Buscar restaurante..." name="termino">
+
+          <select id="country" class="w3-bar-item w3-select w3-right" name="criterio">
+            <option value="zipcode">Código postal</option>
+            <option value="cuisine">Tipo de cocina</option>
+            <option value="borough">Barrio</option>
+            
+          </select>
+        </form>
+        
+      </div>
+			
+      <div class="w3-row">
+        <div class="w3-third w3-container">
+          <img src= {{data_page.logo}} >
+        </div>
+
+        <div class = "w3-third w3-container">
+          <h1>{{data_page.header_title}}</h1>
+          <h2>{{data_page.header_subtitle}}</h2>
+        </div>
+
+
+        <div class="w3-third w3-container ">
+  				{%if not logged%}
+  					<form action="" method = "post">
+  						<p><input type = "text" name = "username"/></p>
+              <p><input type = "password" name = "password"/></p>
+  						<p><input type = "submit" value = "Login"/></p>
+  					</form>
+            <form action="\signup" method = "post">
+              <input type = "submit" value = "register">
+            </form>
+
+  				{%else%}
+            <p>Bienvenido {{session['username']}}</p>
+            <p><a href="/logout">Desconectarse</a></p>
+
+          {%endif%}
+        </div>
+
+
+
+		</header>
+
+
+    <div class="centered-content w3-row">
+          <div class = "content_left w3-col m3">
+
+
+            <div id="vertical-menu" class="vertical-menu">
+              {%for i in data_page.menu%}
+                  <a href={{i[1]}}>{{i[0]}}</a>
+              {%endfor%}
+
+              {% if logged %}
+                <a href='/setting'>Opciones</a>
+                <a href='/userInfo'>Mis datos</a>
+              {% endif %}
+              
+              <div class="dropdown">
+                <button class="dropbtn">History</button>
+                <div class="dropdown-content">
+                  {%for i in data_page.last_visited%}
+                      <a href={{i}}>{{i}}</a>
+                  {%endfor%}
+                
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div id = "content-middle" class ="w3-container w3-col m9">
+            <table class="w3-table-all">
+              <thead>
+                <tr class="w3-green">
+                  {%for i in data_page.table_header%}
+                    <th>{{i}}</th>
+                  {%endfor%}
+                </tr>
+              </thead>
+
+              {%for i in data_page.restaurants%}
+                <tr>
+                  <td>{{i['name']}}</td>
+                  <td>{{i['cuisine']}}</td>
+                  <td>{{i['address']['street']}}</td>
+                </tr>
+              {%endfor%}
+
+            </table>
+          </div>
+
+
+
+    </div>
+
+	
+
+
+		<footer class="w3-container w3-teal">
+			Samuel Cardenete Rodríguez. (GPLv3)
+		</footer>
+
+
+	</body>
+</html>

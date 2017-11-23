@@ -1,0 +1,20 @@
+{% extends "simple-centered.html" %}
+
+{% block title %}
+	setting
+{% endblock %}
+{% block head %}
+	{{super()}}
+{% endblock %}
+
+{% block content %}
+	{% block centered_content %}
+	<h2 class = "w3-text-color-blue">Datos del usuario</h2>
+	<ul>
+ 		<li><b>Nombre de Usuario</b>: {{data_page.user}}</li>
+		<li><b>Descripcion:</b>: {{data_page.descripcion}}</li>
+		<li><b>Contraseña</b>: ************</p></li>
+	</ul>
+	{% endblock %}
+{% endblock %}
+	

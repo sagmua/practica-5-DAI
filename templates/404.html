@@ -1,0 +1,21 @@
+
+
+{% extends "simple-centered.html" %}
+
+{% block title %}
+	Error 404
+{% endblock %}
+
+{% block head %}
+	{{super()}}
+{% endblock %}
+
+{% block content %}
+	{% block centered_content %}
+		<p class = "w3-jumbo w3-text-grey">Error 404</p>
+		<div class = "w3-container w3-blue w3-border w3-round-xlarge">
+		<h1>Parece que andas perdido. Probablemente te hayas equivocado escribiendo la direccion</h1>
+		</div>
+	{% endblock %}
+	
+{% endblock %}

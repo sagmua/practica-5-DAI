@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	{%block head%}
+	<head>
+		<title>{%block title%}{%endblock%}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+	</head>
+	{%endblock%}
+
+
+	{% block body %}
+	<body>
+		<div class = "w3-display-middle">
+			{% block centered_content %}{% endblock %}
+		</div>
+
+	</body>
+	{% endblock %}
+
+
+</html>

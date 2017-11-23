@@ -1,0 +1,21 @@
+{% extends "simple-centered.html" %}
+
+{% block title %}
+	signup
+{% endblock %}
+{% block head %}
+	{{super()}}
+{% endblock %}
+
+{% block content %}
+	{% block centered_content %}
+	<h2 class = "w3-text-color-blue">Sign up</h2>
+	<form action="/register" method = "post">
+ 				<p><input type = "text" name = "username"/></p>
+ 				<p><input type = "password" name = "password"/></p>
+ 				<p><input type = "submit" value = "Sign up"/></p>
+			</form>
+	{% endblock %}
+{% endblock %}
+	
+	
