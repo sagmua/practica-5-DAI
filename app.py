@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, session, redirect, url_for, escape, request, g
+from flask import jsonify
 import shelve, queue
+
+from bson.json_util  import dumps
 
 import pymongo
 
@@ -56,13 +59,12 @@ def index():
 			#obtenemos el criterio de búsqueda:
 			criterio = select
 			#buscamos en la base de datos en función de ese campo:
-			print(criterio)
-			print(request.form.get('termino'))
 			termino = request.form.get('termino')
 			resultado_busqueda = restaurants_search(criterio, termino)
 
 			print(resultado_busqueda.count())
 			data_page['restaurants'] = resultado_busqueda
+			data_page['criterios'] = [criterio, termino]
 
 
 		else:
@@ -212,18 +214,51 @@ def restaurants_search(criterio = 'borough', termino = ''):
 	db = con.test
 
 	if criterio == 'zipcode':
-		search = db.restaurants.find({ 'address.'+criterio : termino })
+		search = db.restaurants.find({ 'address.'+criterio : termino }).limit(10)
 	else:
-		search = db.restaurants.find({ criterio : termino })
+		search = db.restaurants.find({ criterio : termino }).limit(10)
 	
 
 	
-	print(search.count())
 
 
 
 	#buscamos los restaurantes con los criterios introducidos:
 	return search
+
+
+#Función para obtener la paginacion de los restaurantes:
+@app.route('/find_ajax', methods=['GET'])
+def find_ajax():
+	try:
+		con = pymongo.MongoClient()
+		print ('Connected succesfully')
+	except pymongo.errors.ConnectionFailure:
+		print ('Error during connecting mongo database')
+
+	db = con.test
+
+	#obtenemos los parametros de busqueda anteriores:
+	data_page = request.args.get('data_page', '')
+
+	criterio=data_page['criterios'][0]
+	termino=data_page['criterios'][1]
+
+	#obtenemos el número de página:
+	num_pagina = int(request.args.get('num_pagina',1))-1
+
+
+	if criterio == 'zipcode':
+		search = db.restaurants.find({ 'address.'+criterio : termino }).skip(num_pagina*10).limit(10)
+	else:
+		search = db.restaurants.find({ criterio : termino }).skip(num_pagina*10).limit(10)
+
+
+
+
+
+
+	return dumps(search)
 
 
 if __name__ == '__main__':
