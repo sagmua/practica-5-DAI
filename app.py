@@ -6,7 +6,7 @@ import shelve, queue
 
 from bson.json_util  import dumps
 
-import pymongo
+import pymongo, ast
 
 
 
@@ -44,6 +44,9 @@ def index():
 		'table_header' : ('Nombre', 'Tipo de restaurante', 'Calle')
 	}
 
+	criterio = ''
+	termino = ''
+
 	
 
 
@@ -64,7 +67,7 @@ def index():
 
 			print(resultado_busqueda.count())
 			data_page['restaurants'] = resultado_busqueda
-			data_page['criterios'] = [criterio, termino]
+			
 
 
 		else:
@@ -80,11 +83,11 @@ def index():
 	#Si esta logeado:
 	if 'username' in session:
 		username = session['username']
-		return render_template('welcome.html', data_page=data_page,logged=True)
+		return render_template('welcome.html', data_page=data_page,logged=True,criterio=criterio,termino=termino)
 
 	#en caso de no estar registrado:
 	else:
-		return render_template('welcome.html',data_page=data_page, logged=False)
+		return render_template('welcome.html',data_page=data_page, logged=False,criterio=criterio,termino=termino)
 
 
 
@@ -239,10 +242,11 @@ def find_ajax():
 	db = con.test
 
 	#obtenemos los parametros de busqueda anteriores:
-	data_page = request.args.get('data_page', '')
+	criterio = request.args.get('criterio', '')
+	termino = request.args.get('termino', '')
 
-	criterio=data_page['criterios'][0]
-	termino=data_page['criterios'][1]
+	print(criterio)
+
 
 	#obtenemos el número de página:
 	num_pagina = int(request.args.get('num_pagina',1))-1

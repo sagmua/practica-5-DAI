@@ -28,7 +28,8 @@
     botones();
     
     var num_pagina = 1
-    var param = '{{data_page}}'
+    var criterio = '{{criterio}}'
+    var termino = '{{termino}}'
 
     function botones(){                          // jQuery function
 
@@ -40,7 +41,10 @@
         });
 
        $("#pag_anterior").click(function() {
-         num_pagina-=1;
+        if (num_pagina != 1){
+          num_pagina-=1;
+        }
+         
          obtener_datos_ajax();
          console.log(num_pagina);
         });
@@ -49,7 +53,7 @@
 
     function obtener_datos_ajax(){                          // jQuery function
 
-       $.get ('/find_ajax', {num_pagina:num_pagina, data_page: param}, function(data){
+       $.get ('/find_ajax', {num_pagina:num_pagina, criterio: criterio, termino:termino}, function(data){
           var restaurants = JSON.parse(data);
 
           //vaciamos la tabla:
